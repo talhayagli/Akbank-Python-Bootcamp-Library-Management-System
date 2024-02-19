@@ -31,7 +31,7 @@ class Library:
                     relDATES= columns[2]
                     nPAGES= columns[3]
 
-                    print(bookNAMES+" , "+authorNAMES)
+                    print("\n"+bookNAMES+" , "+authorNAMES)
 
                 print("\nThere are "+str(numLine)+" books in the library.\n")   
         
@@ -44,52 +44,53 @@ class Library:
 
 
                 
+        try:
+            while True:
 
-        while True:
+                delType=input("\n1-Delete by book name\n2-Delete all the library\n3-Quit to MENU:")
 
-            delType=input("\n1-Delete by book name\n2-Delete all the library\n3-Quit to MENU:")
-
-            if delType =="1":
-                deletedName=input("\nName of the book:").upper()
+                if delType =="1":
+                    deletedName=input("\nName of the book:").upper()
                 
                 
-                with open('books.txt','r',encoding="utf-8") as file:
-                    bookList=[]
-                    lines=file.readlines()
-                    print(lines)
-                    for line in lines:
+                    with open('books.txt','r',encoding="utf-8") as file:
+                        bookList=[]
+                        lines=file.readlines()
+                    
+                        for line in lines:
         
-                        parts = line.strip().split(",")  
+                            parts = line.strip().split(",")  
                         
-                        book_name = parts[0].strip()
+                            book_name = parts[0].strip()
                         
-                        bookList.append(book_name)
+                            bookList.append(book_name)
                 
-                try:
-                    index=bookList.index(deletedName)
-                    with open("books.txt", 'w',encoding="utf-8") as file:
-                        filtered_lines = [line for line in lines if lines[index] not in line]
-                        file.writelines(filtered_lines)
-                        print("\nTHE BOOK "+deletedName+" HAS BEEN DELETED.\n")
+                    try:
+                        index=bookList.index(deletedName)
+                        with open("books.txt", 'w',encoding="utf-8") as file:
+                            filtered_lines = [line for line in lines if lines[index] not in line]
+                            file.writelines(filtered_lines)
+                            print("\nTHE BOOK "+deletedName+" HAS BEEN DELETED.\n")
 
                             
-                except ValueError:
-                    print("\nBook does not  in the library.\n")
+                    except ValueError:
+                        print("\nBook does not  in the library.\n")
 
                                
     
-            elif delType=="2":
-                with open("books.txt", 'w') as file:
-                    file.write("")
-                    print("\nALL THE LIBRARY HAS BEEN DELETED\n.")
-                break
+                elif delType=="2":
+                    with open("books.txt", 'w') as file:
+                        file.write("")
+                        print("\nALL THE LIBRARY HAS BEEN DELETED\n.")
+                    break
             
 
-            elif delType=="3" or delType=="q" or delType=="Q":
+                elif delType=="3" or delType=="q" or delType=="Q":
 
 
-                break
-            
+                    break
+        except:
+            print("\nTHE TXT FILE YOU WANT TO DELETE A BOOK IS NOT EXISTS RIGHT NOW FIRST YOU MUST ADD A BOOK TO CREATE THE TXT FILE !!! ")    
 
 
 while True:
@@ -102,7 +103,7 @@ while True:
     elif process=="3":
         Library.removeLib()
         
-    elif process =="q" or process =="Q":
+    elif process =="q" or process =="Q" :
         break
     else:
         print("\nWRONG INPUT, TRY AGAIN !!!\n")
